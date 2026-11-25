@@ -899,10 +899,7 @@ PREAMBLE
 
     openButton.addEventListener("click", async () => {
       openButton.disabled = true;
-      if (audio.hasAttribute("src")) {
-        musicControls.hidden = false;
-        playMusic();
-      }
+      musicControls.hidden = !audio.hasAttribute("src");
       if (!reducedMotion.matches && cover.animate) {
         await cover.animate([
           { opacity: 1, transform: "scale(1)", filter: "brightness(1)" },
