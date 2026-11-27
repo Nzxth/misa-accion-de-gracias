@@ -271,9 +271,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .card-particles {
       position: absolute;
       z-index: 0;
-      --star-low: .31;
-      --star-high: .55;
-      --star-idle: .45;
+      --star-low: .43;
+      --star-high: .73;
+      --star-idle: .58;
     }
     .particles span {
       position: absolute;
@@ -282,28 +282,35 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       width: var(--size, 9px);
       aspect-ratio: 1;
       color: var(--star-gold);
-      opacity: var(--star-idle, .64);
-      animation: float-particle var(--duration, 8.5s) var(--delay, 0s) ease-in-out infinite alternate;
+      opacity: var(--star-idle, .72);
+      animation:
+        float-particle var(--duration, 8.5s) var(--delay, 0s) ease-in-out infinite alternate,
+        glint-particle var(--duration, 8.5s) var(--delay, 0s) ease-in-out infinite;
     }
     .particles span::before, .particles span::after {
       content: "";
       position: absolute;
     }
     .particles span::before {
-      inset: -4px;
-      background: radial-gradient(circle, #fff3c8c4 0%, #dcb05260 35%, transparent 72%);
+      inset: -5px;
+      background: radial-gradient(circle, #fff6d399 0%, #e7ba595e 27%, #d5a54a26 49%, transparent 73%);
     }
     .particles span::after {
       inset: 0;
-      background: linear-gradient(130deg, var(--gold-pale), currentColor 70%);
-      clip-path: polygon(50% 0%, 62% 35%, 100% 38%, 71% 62%, 81% 100%, 50% 78%, 19% 100%, 29% 62%, 0% 38%, 38% 35%);
+      background: radial-gradient(circle, #fffdf4 0 14%, #fff0af 24%, #e2b54c 42%, currentColor 73%);
+      clip-path: polygon(50% 0%, 59% 37%, 100% 50%, 59% 63%, 50% 100%, 41% 63%, 0% 50%, 41% 37%);
     }
     .particles .star-sparkle::after {
-      clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+      clip-path: polygon(50% 0%, 57% 41%, 100% 50%, 57% 59%, 50% 100%, 43% 59%, 0% 50%, 43% 41%);
+      transform: rotate(14deg) scale(.86);
     }
     @keyframes float-particle {
-      from { opacity: var(--star-low, .48); transform: translate3d(0, 3px, 0) rotate(-5deg) scale(.95); }
-      to { opacity: var(--star-high, .77); transform: translate3d(var(--drift, 4px), -4px, 0) rotate(6deg) scale(1.04); }
+      from { transform: translate3d(0, 3px, 0) rotate(-5deg) scale(.95); }
+      to { transform: translate3d(var(--drift, 4px), -4px, 0) rotate(6deg) scale(1.04); }
+    }
+    @keyframes glint-particle {
+      0%, 100% { opacity: var(--star-low, .58); }
+      46% { opacity: var(--star-high, .88); }
     }
     a { color: inherit; }
     button { font: inherit; color: inherit; cursor: pointer; }
