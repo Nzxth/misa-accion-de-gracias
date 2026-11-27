@@ -259,37 +259,51 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       color: var(--ink);
       font: 1rem/1.65 var(--sans);
     }
-    .ambient-particles {
-      position: fixed;
+    .particles {
       inset: 0;
-      z-index: -1;
       overflow: hidden;
       pointer-events: none;
     }
-    .ambient-particles span {
+    .ambient-particles {
+      position: fixed;
+      z-index: -1;
+    }
+    .card-particles {
+      position: absolute;
+      z-index: 0;
+      --star-low: .31;
+      --star-high: .55;
+      --star-idle: .45;
+    }
+    .particles span {
       position: absolute;
       top: var(--y);
       left: var(--x);
       width: var(--size, 9px);
       aspect-ratio: 1;
       color: var(--star-gold);
-      opacity: .68;
-      animation: float-particle var(--duration, 5s) var(--delay, 0s) ease-in-out infinite alternate;
+      opacity: var(--star-idle, .64);
+      animation: float-particle var(--duration, 8.5s) var(--delay, 0s) ease-in-out infinite alternate;
     }
-    .ambient-particles span::before {
+    .particles span::before, .particles span::after {
       content: "";
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(130deg, var(--gold-pale), currentColor 67%);
+      position: absolute;
+    }
+    .particles span::before {
+      inset: -4px;
+      background: radial-gradient(circle, #fff3c8c4 0%, #dcb05260 35%, transparent 72%);
+    }
+    .particles span::after {
+      inset: 0;
+      background: linear-gradient(130deg, var(--gold-pale), currentColor 70%);
       clip-path: polygon(50% 0%, 62% 35%, 100% 38%, 71% 62%, 81% 100%, 50% 78%, 19% 100%, 29% 62%, 0% 38%, 38% 35%);
     }
-    .ambient-particles .star-sparkle::before {
+    .particles .star-sparkle::after {
       clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
     }
     @keyframes float-particle {
-      from { opacity: .42; transform: translate3d(0, 9px, 0) rotate(-9deg) scale(.86); }
-      to { opacity: .92; transform: translate3d(var(--drift, 6px), -11px, 0) rotate(13deg) scale(1.08); }
+      from { opacity: var(--star-low, .48); transform: translate3d(0, 3px, 0) rotate(-5deg) scale(.95); }
+      to { opacity: var(--star-high, .77); transform: translate3d(var(--drift, 4px), -4px, 0) rotate(6deg) scale(1.04); }
     }
     a { color: inherit; }
     button { font: inherit; color: inherit; cursor: pointer; }
@@ -932,23 +946,22 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   </style>
 </head>
 <body id="inicio">
-  <div class="ambient-particles" aria-hidden="true">
-    <span style="--x:2%;--y:12%;--size:13px;--delay:-3s"></span>
-    <span class="star-sparkle star-inner" style="--x:11%;--y:27%;--size:10px;--delay:-5s"></span>
-    <span class="star-inner" style="--x:24%;--y:9%;--size:11px;--duration:5.6s"></span>
-    <span class="star-sparkle" style="--x:1.3%;--y:44%;--size:8px;--delay:-4s"></span>
-    <span style="--x:2%;--y:74%;--size:12px;--duration:5.7s"></span>
-    <span class="star-sparkle star-inner" style="--x:11%;--y:82%;--size:13px;--delay:-1.5s"></span>
-    <span class="star-inner" style="--x:21%;--y:91%;--size:10px;--delay:-5s"></span>
-    <span class="star-sparkle" style="--x:41%;--y:4%;--size:10px;--delay:-2.4s"></span>
-    <span class="star-inner" style="--x:68%;--y:10%;--size:10px;--delay:-7s;--drift:-7px"></span>
-    <span class="star-sparkle star-inner" style="--x:86%;--y:8%;--size:9px;--delay:-3.6s;--drift:-4px"></span>
-    <span style="--x:95.5%;--y:17%;--size:13px;--duration:4.5s;--drift:-5px"></span>
-    <span class="star-sparkle" style="--x:96%;--y:39%;--size:9px;--delay:-6s;--drift:-5px"></span>
-    <span class="star-inner" style="--x:88%;--y:61%;--size:9px;--delay:-2s;--drift:-6px"></span>
-    <span style="--x:96%;--y:71%;--size:11px;--duration:6.1s;--drift:-6px"></span>
-    <span class="star-sparkle" style="--x:53%;--y:96%;--size:10px;--delay:-5.2s"></span>
-    <span class="star-inner" style="--x:79%;--y:91%;--size:13px;--delay:-5s"></span>
+  <div class="particles ambient-particles" aria-hidden="true">
+    <span style="--x:5%;--y:13%;--size:11px;--duration:8.7s;--delay:-1.7s;--drift:-3px"></span>
+    <span class="star-sparkle star-inner" style="--x:11%;--y:26%;--size:8px;--duration:9.1s;--delay:-6.2s;--drift:4px"></span>
+    <span class="star-sparkle" style="--x:3%;--y:40%;--size:9px;--duration:8.2s;--delay:-4.1s;--drift:3px"></span>
+    <span class="star-inner" style="--x:8%;--y:59%;--size:10px;--duration:9.7s;--delay:-2.3s;--drift:-4px"></span>
+    <span style="--x:4%;--y:78%;--size:11px;--duration:8.8s;--delay:-7.2s;--drift:3px"></span>
+    <span class="star-sparkle star-inner" style="--x:14%;--y:92%;--size:8px;--duration:9.8s;--delay:-5.8s;--drift:3px"></span>
+    <span class="star-inner" style="--x:29%;--y:7%;--size:9px;--duration:8.1s;--delay:-6.5s;--drift:4px"></span>
+    <span class="star-sparkle" style="--x:49%;--y:4.5%;--size:9px;--duration:9.3s;--delay:-3.3s;--drift:-3px"></span>
+    <span class="star-inner" style="--x:70%;--y:7%;--size:8px;--duration:9.6s;--delay:-5.1s;--drift:3px"></span>
+    <span style="--x:94%;--y:15%;--size:10px;--duration:8.3s;--delay:-3.8s;--drift:-4px"></span>
+    <span class="star-sparkle star-inner" style="--x:87%;--y:28%;--size:8px;--duration:9.2s;--delay:-7.5s;--drift:-3px"></span>
+    <span class="star-sparkle" style="--x:96%;--y:44%;--size:9px;--duration:8.8s;--delay:-4.9s;--drift:-4px"></span>
+    <span class="star-inner" style="--x:91%;--y:66%;--size:10px;--duration:9.5s;--delay:-1.1s;--drift:3px"></span>
+    <span style="--x:95%;--y:83%;--size:11px;--duration:8.6s;--delay:-6.6s;--drift:-4px"></span>
+    <span class="star-sparkle" style="--x:63%;--y:95%;--size:8px;--duration:9.8s;--delay:-2.6s;--drift:3px"></span>
   </div>
   <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -965,6 +978,15 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   </svg>
   <section id="portada" class="cover page" aria-labelledby="titulo-portada">
     <div class="cover-stationery">
+      <div class="particles card-particles" aria-hidden="true">
+        <span class="star-sparkle" style="--x:74%;--y:6%;--size:8px;--duration:8.4s;--delay:-3.8s;--drift:3px"></span>
+        <span style="--x:94%;--y:17%;--size:9px;--duration:9.2s;--delay:-6.1s;--drift:-4px"></span>
+        <span class="star-sparkle" style="--x:5.5%;--y:34%;--size:8px;--duration:8.8s;--delay:-4.6s;--drift:3px"></span>
+        <span class="star-sparkle" style="--x:93.5%;--y:48%;--size:8px;--duration:9.6s;--delay:-1.8s;--drift:-3px"></span>
+        <span style="--x:5%;--y:64%;--size:9px;--duration:8.6s;--delay:-5.3s;--drift:4px"></span>
+        <span class="star-sparkle" style="--x:94%;--y:78%;--size:7px;--duration:9.4s;--delay:-7.3s;--drift:-3px"></span>
+        <span class="star-sparkle" style="--x:26%;--y:94%;--size:8px;--duration:8.9s;--delay:-2.7s;--drift:3px"></span>
+      </div>
       <span class="botanical" aria-hidden="true">
         <span class="twig" style="--x:7%;--y:93%;--w:92%;--r:-58deg"></span>
         <span class="twig" style="--x:13%;--y:77%;--w:91%;--r:-34deg"></span>
@@ -1047,6 +1069,15 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   <main class="page" id="invitacion">
 
     <article class="invitation-card" aria-labelledby="titulo">
+      <div class="particles card-particles" aria-hidden="true">
+        <span class="star-sparkle" style="--x:74%;--y:6%;--size:8px;--duration:8.4s;--delay:-3.8s;--drift:3px"></span>
+        <span style="--x:94%;--y:17%;--size:9px;--duration:9.2s;--delay:-6.1s;--drift:-4px"></span>
+        <span class="star-sparkle" style="--x:5.5%;--y:34%;--size:8px;--duration:8.8s;--delay:-4.6s;--drift:3px"></span>
+        <span class="star-sparkle" style="--x:93.5%;--y:48%;--size:8px;--duration:9.6s;--delay:-1.8s;--drift:-3px"></span>
+        <span style="--x:5%;--y:64%;--size:9px;--duration:8.6s;--delay:-5.3s;--drift:4px"></span>
+        <span class="star-sparkle" style="--x:94%;--y:78%;--size:7px;--duration:9.4s;--delay:-7.3s;--drift:-3px"></span>
+        <span class="star-sparkle" style="--x:26%;--y:94%;--size:8px;--duration:8.9s;--delay:-2.7s;--drift:3px"></span>
+      </div>
       <span class="botanical" aria-hidden="true">
         <span class="twig" style="--x:7%;--y:93%;--w:92%;--r:-58deg"></span>
         <span class="twig" style="--x:13%;--y:77%;--w:91%;--r:-34deg"></span>
