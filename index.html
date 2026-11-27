@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#e0e6c4">
+  <meta name="theme-color" content="#101f2b">
   <meta name="description" content="Invitación a la Misa de Acción de Gracias de 5.º B, Promoción 2026. Viernes 18 de diciembre, 5:00 p. m., en el Templo de Piedra de Caraz.">
   <title>Misa de Acción de Gracias · Promoción 2026</title>
   <script>document.documentElement.classList.add("has-js");</script>
@@ -140,8 +140,11 @@ PREAMBLE
     }
 
     :root {
-      color-scheme: light;
-      --paper: #e0e6c4;
+      color-scheme: dark;
+      --canvas: #101f2b;
+      --canvas-text: #f8f1df;
+      --canvas-muted: #d3d9c5;
+      --canvas-line: #aab67b55;
       --ink: #14233c;
       --muted: #354357;
       --olive: #c7d296;
@@ -154,7 +157,7 @@ PREAMBLE
       --serif: "Noto Serif Display", Georgia, serif;
       --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
       --glass: radial-gradient(ellipse at 12% 0%, #ffffffc4, transparent 69%),
-        linear-gradient(145deg, #edf1d9e0, #bac988ce);
+        linear-gradient(145deg, #edf1d9ed, #bac988e8);
       --glass-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #c7a45d33, 0 12px 32px #14233c13;
       --night-glass: radial-gradient(ellipse at 18% 0%, #58708b70, transparent 76%),
         linear-gradient(145deg, #263c56f6, #14233cf7);
@@ -162,18 +165,49 @@ PREAMBLE
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { background: var(--canvas); scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: radial-gradient(ellipse at 78% 4%, #efd5964a, transparent 31rem),
-        radial-gradient(ellipse at 14% 56%, #aebd7b85, transparent 44rem), var(--paper);
-      color: var(--ink);
+      min-height: 100vh;
+      isolation: isolate;
+      background: radial-gradient(ellipse at 8% 4%, #7c8b4c49, transparent 39rem),
+        radial-gradient(ellipse at 91% 46%, #304c63a8, transparent 51rem),
+        radial-gradient(ellipse at 14% 88%, #53683d5c, transparent 48rem),
+        linear-gradient(145deg, #1d302e, var(--canvas) 48%, #152823);
+      color: var(--canvas-text);
       font: 1rem/1.65 var(--sans);
+    }
+    .ambient-particles {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .ambient-particles span {
+      position: absolute;
+      top: var(--y);
+      left: var(--x);
+      width: var(--size, 3px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      color: var(--gold-pale);
+      background: currentColor;
+      box-shadow: 0 0 9px currentColor;
+      opacity: .35;
+      animation: float-particle 4.6s var(--delay, 0s) ease-out both;
+    }
+    .ambient-particles span:nth-child(3n) { color: var(--olive); }
+    @keyframes float-particle {
+      from { opacity: .08; transform: translate3d(0, 8px, 0) scale(.8); }
+      50% { opacity: .63; }
+      to { opacity: .35; transform: translate3d(13px, -22px, 0) scale(1); }
     }
     a { color: inherit; }
     button { font: inherit; color: inherit; cursor: pointer; }
     img { display: block; max-inline-size: 100%; }
-    :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 4px; }
+    :focus-visible { outline: 2px solid var(--gold-pale); outline-offset: 4px; }
+    .hero :focus-visible, .event :focus-visible { outline-color: var(--gold-ink); }
     [id] { scroll-margin-top: 1.25rem; }
     h1, h2, p, figure, dl, dd { margin: 0; }
     h1, h2 { font: 400 1em/1.1 var(--serif); }
@@ -185,6 +219,7 @@ PREAMBLE
       z-index: 3;
       padding: 10px 14px;
       background: #fff;
+      color: var(--ink);
       transform: translateY(-150%);
     }
     .skip:focus { transform: none; }
@@ -216,7 +251,7 @@ PREAMBLE
     }
     .brand-mark .icon { width: 19px; height: 19px; }
     .brand-class { display: block; font: 400 1.25rem/1.05 var(--serif); }
-    .brand-year { display: block; color: var(--muted); font-size: .75rem; margin-top: 4px; }
+    .brand-year { display: block; color: var(--canvas-muted); font-size: .75rem; margin-top: 4px; }
     .site-nav {
       display: flex;
       align-items: center;
@@ -262,11 +297,11 @@ PREAMBLE
       z-index: -1;
       inset: 12% 0;
       pointer-events: none;
-      background: radial-gradient(ellipse at center, #f6f6dcd9 0%, #bdc98799 40%, transparent 73%);
+      background: radial-gradient(ellipse at center, #bccc753e 0%, #82945c25 40%, transparent 73%);
       content: "";
       animation: cover-glow 3.8s ease-out both;
     }
-    .cover .eyebrow { margin-bottom: 8px; }
+    .cover .eyebrow { margin-bottom: 8px; color: var(--canvas-muted); }
     .cover .eyebrow, .cover h1, .cover-button {
       animation: rise-in .8s cubic-bezier(.21,.7,.3,1) backwards;
     }
@@ -277,7 +312,7 @@ PREAMBLE
     }
     .cover h1 em {
       font-size: clamp(1.9rem, 4vw, 3rem);
-      color: var(--gold-ink);
+      color: var(--gold-pale);
     }
     .cover-button {
       position: relative;
@@ -334,7 +369,7 @@ PREAMBLE
       position: absolute;
       top: var(--y);
       left: var(--x);
-      color: var(--gold-ink);
+      color: var(--gold-pale);
       animation: sparkle 3.2s var(--delay) ease-out both;
     }
     @keyframes rise-in {
@@ -483,6 +518,7 @@ PREAMBLE
       position: relative;
       margin: 28px 0 0;
       background: var(--glass);
+      color: var(--ink);
       border: 1px solid #ffffffd9;
       border-radius: 27px;
       padding: 25px 28px 20px;
@@ -554,15 +590,15 @@ PREAMBLE
     body:has(.music-controls:not([hidden])) footer { padding-bottom: 78px; }
 
     .message { text-align: center; max-width: 48rem; margin: 0 auto; padding: 70px 0 63px; }
-    .divider { display: flex; align-items: center; justify-content: center; gap: 11px; color: var(--gold-ink); margin-bottom: 19px; }
+    .divider { display: flex; align-items: center; justify-content: center; gap: 11px; color: var(--gold-pale); margin-bottom: 19px; }
     .divider::before, .divider::after { content: ""; width: 42px; height: 1px; background: var(--gold); }
     .message h2, .gallery h2 { font-size: clamp(2.1rem, 4.35vw, 3.6rem); letter-spacing: -.044em; }
-    .message p { color: var(--muted); max-width: 42rem; margin: 17px auto 0; }
-    .message p strong { color: var(--ink); }
-    .message .closing { font: italic 400 clamp(1.2rem, 2vw, 1.53rem)/1.45 var(--serif); color: var(--gold-ink); margin-top: 24px; }
+    .message p { color: var(--canvas-muted); max-width: 42rem; margin: 17px auto 0; }
+    .message p strong { color: var(--canvas-text); }
+    .message .closing { font: italic 400 clamp(1.2rem, 2vw, 1.53rem)/1.45 var(--serif); color: var(--gold-pale); margin-top: 24px; }
 
-    .gallery { border-top: 1px solid var(--line); padding-block: 38px 66px; }
-    .gallery .eyebrow { margin-bottom: 6px; }
+    .gallery { border-top: 1px solid var(--canvas-line); padding-block: 38px 66px; }
+    .gallery .eyebrow { margin-bottom: 6px; color: var(--gold-pale); }
     .gallery-grid { display: grid; grid-template-columns: 1fr 1.08fr; align-items: center; gap: 24px; margin-top: 22px; }
     .photo-card {
       min-width: 0;
@@ -570,6 +606,7 @@ PREAMBLE
       border: 1px solid #ffffffd9;
       border-radius: 25px;
       background: var(--glass);
+      color: var(--ink);
       box-shadow: var(--glass-shadow), 0 0 0 1px var(--gold-line);
       -webkit-backdrop-filter: blur(18px) saturate(1.15);
       backdrop-filter: blur(18px) saturate(1.15);
@@ -605,9 +642,9 @@ PREAMBLE
     figcaption { padding: 9px 8px 11px; font-size: .9375rem; font-weight: 600; }
 
     footer {
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--canvas-line);
       padding: 22px 0 36px;
-      color: var(--muted);
+      color: var(--canvas-muted);
       font-size: .875rem;
       display: flex;
       justify-content: space-between;
@@ -715,6 +752,20 @@ PREAMBLE
   </style>
 </head>
 <body id="inicio">
+  <div class="ambient-particles" aria-hidden="true">
+    <span style="--x:6%;--y:11%;--size:4px"></span>
+    <span style="--x:17%;--y:29%;--delay:.15s"></span>
+    <span style="--x:26%;--y:10%;--size:5px;--delay:.3s"></span>
+    <span style="--x:8%;--y:54%;--size:2px;--delay:.2s"></span>
+    <span style="--x:18%;--y:78%;--size:4px"></span>
+    <span style="--x:28%;--y:92%;--delay:.3s"></span>
+    <span style="--x:71%;--y:9%;--delay:.2s"></span>
+    <span style="--x:84%;--y:20%;--size:5px;--delay:.3s"></span>
+    <span style="--x:93%;--y:37%;--size:4px"></span>
+    <span style="--x:78%;--y:61%;--delay:.15s"></span>
+    <span style="--x:91%;--y:76%;--size:4px;--delay:.25s"></span>
+    <span style="--x:73%;--y:93%;--size:3px"></span>
+  </div>
   <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 3v18M5 9h14"/></symbol>
